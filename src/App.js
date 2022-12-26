@@ -5,9 +5,9 @@ import {useTheme, createTheme,} from '@mui/material';
 import {MainPage} from './pages/MainPage';
 import {ChatsPage} from './pages/ChatsPage';
 import {ProfilePage} from './pages/ProfilePage'; 
-import { Header } from './Components/Header/Header';
+import { Header } from './components/Header/Header'
 import { store } from './store/index'
-import { ChatsList } from './Components/ChatsList/ChatsList';
+import { ChatsList } from './components/ChatsList/ChatsList'
 
 
 
