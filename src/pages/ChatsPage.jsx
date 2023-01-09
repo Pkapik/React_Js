@@ -2,9 +2,9 @@
 import { useParams, Navigate } from 'react-router-dom'
 import { useSelector } from "react-redux"
 // import { Message } from "../Components/Message/Message"
-import { MessageContainer } from "../Components/Message/MessageContainer"
-import { MessageList } from "../Components/MessageList/MessageList"
-import { ChatsList } from "../Components/ChatsList/ChatsList"
+import { MessageContainer } from "../components/Message/MessageContainer"
+import { MessageList } from "../components/MessageList/MessageList"
+import { ChatsList } from "../components/ChatsList/ChatsList"
 import styles from './Pages.module.css'
 import { selectMessage } from "../store/messages/selectors"
 // import { addMessageBot } from "../store/messages/actions"

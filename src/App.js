@@ -3,16 +3,16 @@ import { Routes, Route } from 'react-router-dom'
 
 import { Provider } from 'react-redux';
 
-import { ChatsList } from './Components/ChatsList/ChatsList';
+import { ChatsList } from './components/ChatsList/ChatsList'
 import {useTheme, createTheme,} from '@mui/material';
 
 import {MainPage} from './pages/MainPage';
 import {ChatsPage} from './pages/ChatsPage';
 import {ProfilePage} from './pages/ProfilePage';
 import {AboutWithConnect} from './pages/AboutPage'
-import { Header } from './Components/Header/Header';
+import { Header } from './components/Header/Header'
 import { store, persistor } from './store/index'
-import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 
