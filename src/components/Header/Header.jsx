@@ -1,4 +1,5 @@
 import { NavLink, Outlet} from 'react-router-dom'
+
 import styles from './Header.module.css'
 
 export const navigate = [
@@ -16,6 +17,11 @@ export const navigate = [
     id: 3,
     name: 'Chat',
     to: '/chats'
+  },
+  {
+    id: 4,
+    name: 'About',
+    to: '/about'
   },
 ]
 

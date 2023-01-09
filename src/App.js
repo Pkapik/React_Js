@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { Routes, Route } from 'react-router-dom'
+
 import { Provider } from 'react-redux';
+
+import { ChatsList } from './Components/ChatsList/ChatsList';
 import {useTheme, createTheme,} from '@mui/material';
+
 import {MainPage} from './pages/MainPage';
 import {ChatsPage} from './pages/ChatsPage';
-import {ProfilePage} from './pages/ProfilePage'; 
-import { Header } from './components/Header/Header'
-import { store } from './store/index'
-import { ChatsList } from './components/ChatsList/ChatsList'
+import {ProfilePage} from './pages/ProfilePage';
+import {AboutWithConnect} from './pages/AboutPage'
+import { Header } from './Components/Header/Header';
+import { store, persistor } from './store/index'
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 
@@ -32,10 +37,12 @@ export function App() {
   return (
     <>
       <Provider store={store}>
-        <Routes>
+        <PersistGate persistor={persistor}>
+          <Routes>
           <Route path="/" element={<Header />}>
             <Route index element={<MainPage />} />
             <Route path='profile' element={<ProfilePage />} />
+            <Route path='about' element={<AboutWithConnect />} />
             <Route path='chats'>
               <Route index element={<ChatsList />} />
               <Route 
@@ -46,7 +53,8 @@ export function App() {
           </Route>
           <Route path="*" element={<h2>404 Page not FOUND</h2>} />
         </Routes>
-        </Provider>
+        </PersistGate>
+      </Provider>
     </>
   )
 }
