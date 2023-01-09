@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useParams, Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
-import { Message } from "../Components/Message/Message"
-import { MessageList } from "../Components/MessageList/MessageList"
-import { ChatsList } from "../Components/ChatsList/ChatsList"
+import { Message } from '../components/Message'
+import { MessageList } from '../components/MessageList/MessageList'
+import { ChatsList } from '../components/ChatsList/ChatsList'
 import styles from './Pages.module.css'
 import { selectMessage } from "../store/messages/selectors"
 import { addMessageBot } from "../store/messages/actions"
