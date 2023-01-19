@@ -1,48 +1,51 @@
-// import { useEffect } from "react"
 import { useParams, Navigate } from 'react-router-dom'
 import { useSelector } from "react-redux"
-// import { Message } from "../Components/Message/Message"
 import { MessageContainer } from "../components/Message/MessageContainer"
-import { MessageList } from "../components/MessageList/MessageList"
-import { ChatsList } from "../components/ChatsList/ChatsList"
+import { MessageList } from '../components/MessageList/MessageList'
+import { ChatsList } from '../components/ChatsList/ChatsList'
 import styles from './Pages.module.css'
 import { selectMessage } from "../store/messages/selectors"
-// import { addMessageBot } from "../store/messages/actions"
+import { WithCLasses } from '../HOC/WithCLasses'
+import { Message } from '../components/Message/Message'
 
-
-export function ChatsPage () {
+export function ChatsPage ({messageDB, chats}) {
+  
   const {chatId} = useParams()
-  const messages = useSelector(selectMessage)
-  // const dispatch = useDispatch()
+ 
+  // const messages = useSelector(selectMessage)
+  const MessageListWithClass = WithCLasses(MessageList)
 
-  // useEffect(() => {
-  //   if(chatId && messages[chatId]?.length > 0 && messages[chatId][messages[chatId].length - 1].author === 'user') {
-  //     const timeOut = setTimeout(() => {
-  //       dispatch(addMessageBot(chatId, [
-  //          'I am BOT'
-  //       ]))
-  //     }, 1500)
-  //     return() => {clearTimeout(timeOut)}
-  //   }
-  // }, [chatId, messages])
+  const messagesChat = chats.find((chat) => chat?.name === chatId)
+  console.log('messagesChat', messagesChat)
+  const messages = Object.entries(messagesChat.messages).map((mes) => ({
+    id: mes[0],
+    text: mes[1].text,
+    author: mes[1].author,
+  }))
+  console.log('messages', messages)
+  
 
-
-  if(chatId && !messages[chatId]) {
-    return <Navigate to="/chats" replace />
-  }
+  // if(chatId && !messages[chatId]) {
+  //   return <Navigate to="/chats" replace />
+  // }
 
   return (
     <>
       <h1>Welcome to chat!</h1>
-      <ChatsList />
+      <ChatsList chats={chats}/>
       <div className={styles.messageStyle}>
         <div>
-      <MessageContainer />
+           {/* <MessageContainer /> */}
+        </div>
+        <div className="styles.listStyle">
+          {/* <MessageList messages={chatId ? messages : []} /> */}
+          <MessageListWithClass
+            messages={chatId ? messages : []} 
+            classes={styles.border}
+           />
+        </div>
       </div>
-      <div className="styles.listStyle">
-      <MessageList messages={chatId ? messages[chatId] : []} />
-      </div>
-      </div>
+      <Message />
     </>
   )
 }
