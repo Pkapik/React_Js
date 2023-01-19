@@ -18,6 +18,10 @@ import { firebaseAuth, messagesRef } from './services/firebase';
 import { onValue } from 'firebase/database'
 import { useEffect, useState } from 'react';
 import { auth } from './store/profile/actions';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { BrowserRouter } from 'react-router-dom'
+
 
 const theme = createTheme({
   palette: {
@@ -38,7 +42,9 @@ export function App() {
   const [chats, setChats] = useState([])
   
   useEffect(() => {
+    
    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+    
       if(user) {
         dispatch(auth(true))
       } else {
@@ -51,9 +57,10 @@ export function App() {
   useEffect(() => {
     onValue(messagesRef, (snapshot) => {
       const data = snapshot.val()
+      console.log(data)
       const newChats = Object.entries(data).map((item) => ({
         name: item[0],
-        messages: item[1].messageList//изменила на s
+        messages: item[1].messageList //изменила на s
       }))
       setMessageDB(data)
       setChats(newChats)
@@ -64,7 +71,7 @@ export function App() {
 
   return (
     <>
-      {/* <Provider store={store}> */}
+
         <PersistGate persistor={persistor}>
           <Routes>
             <Route path="/" element={<Header />}>
@@ -90,9 +97,21 @@ export function App() {
           <Route path="*" element={<h2>404 Page not FOUND</h2>} />
         </Routes>
       </PersistGate>
-      {/* </Provider> */}
+
     </>
   )
 }
+
+let AppForTest = (props) => {
+  return (
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
+  )
+}
+
+export default AppForTest
 
 
